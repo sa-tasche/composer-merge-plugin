@@ -12,16 +12,18 @@ namespace Wikimedia\Composer\Merge\V2;
 
 use Composer\Composer;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @covers \Wikimedia\Composer\Merge\V2\PluginState
  */
 class PluginStateTest extends TestCase
 {
+    use ProphecyTrait;
 
     public function testLocked()
     {
-        $composer = $this->prophesize('Composer\Composer')->reveal();
+        $composer = $this->prophesize(Composer::class)->reveal();
         $fixture = new PluginState($composer);
 
         $this->assertFalse($fixture->isLocked());
@@ -34,7 +36,7 @@ class PluginStateTest extends TestCase
 
     public function testDumpAutoloader()
     {
-        $composer = $this->prophesize('Composer\Composer')->reveal();
+        $composer = $this->prophesize(Composer::class)->reveal();
         $fixture = new PluginState($composer);
 
         $this->assertFalse($fixture->shouldDumpAutoloader());
@@ -45,7 +47,7 @@ class PluginStateTest extends TestCase
 
     public function testOptimizeAutoloader()
     {
-        $composer = $this->prophesize('Composer\Composer')->reveal();
+        $composer = $this->prophesize(Composer::class)->reveal();
         $fixture = new PluginState($composer);
 
         $this->assertFalse($fixture->shouldOptimizeAutoloader());
